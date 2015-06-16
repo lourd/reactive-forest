@@ -1,5 +1,8 @@
 {
   "dependencies": {
+    "gsap": {
+      "version": "1.17.0"
+    },
     "material-ui": {
       "version": "0.9.1",
       "dependencies": {

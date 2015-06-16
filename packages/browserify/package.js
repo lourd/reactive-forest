@@ -14,15 +14,17 @@ Npm.depends({
   'underscore' : '1.8.3',
   'react' : '0.13.3',
   'material-ui' : '0.9.1',
+  'gsap' : '1.17.0',
 });
 
 Package.onUse(function(api) {
-  api.use([ 'cosmos:browserify'], ['client', 'server']);
-  api.addFiles([ 'the.browserify.js'], ['client', 'server']);
+  api.use([ 'cosmos:browserify'], 'client');
+  api.addFiles([ 'the.browserify.js'], 'client');
 
   api.export([
     'React',
     '_',
     'Material',
-  ], ['client', 'server']);
+    'TweenLite',
+  ], 'client');
 });
