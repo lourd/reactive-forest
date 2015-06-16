@@ -25,14 +25,9 @@ class Plant extends Component {
 
   render() {
     var { count } = this.state;
-    var paperStyle = {
-      width: '200px',
-      height: '200px',
-      fontSize: '16px',
-    }
     return (
       <main>
-        <Paper zIndex={2} style={paperStyle} className="count">
+        <Paper zIndex={2} className="count-card">
           <CSSTransitionGroup transitionName="example" transitionAppear={true} component='div' >
             <div className='num' key={count}>{count}</div>
           </CSSTransitionGroup>
