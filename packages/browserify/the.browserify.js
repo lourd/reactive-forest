@@ -1,4 +1,4 @@
 // Write your package code here!
-React = require('react');
+React = require('react/addons');
 _ = require('underscore');
 Material = require('material-ui');
