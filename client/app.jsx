@@ -1,7 +1,6 @@
 var { Component, PropTypes } = React;
 var { FloatingActionButton, Paper, Styles, Slider } = Material;
 var ThemeManager = new Styles.ThemeManager();
-var { CSSTransitionGroup } = React.addons;
 
 class Plant extends Component {
   constructor(props) {
@@ -33,17 +32,28 @@ class Plant extends Component {
     return (
       <main>
         <Paper zIndex={2} className="count-card">
-          {/*<CSSTransitionGroup transitionName="example" transitionAppear={true} component='div' >*/}
-            <div className='num' key={count}>{truncCount}</div>
-          {/*</CSSTransitionGroup>*/}
+          <div className='num'>{truncCount}</div>
+          <FloatingActionButton
+            onClick={this._onUp.bind(this)}
+            className="up"
+            style={{
+              position: 'absolute',
+              top: '5px',
+              right: '5px',
+            }}
+          >Up!</FloatingActionButton>
+          <FloatingActionButton
+            onClick={this._onDown.bind(this)}
+            secondary={true}
+            className="down"
+            style={{
+              position: 'absolute',
+              bottom: '5px',
+              right: '5px',
+            }}
+          >Down</FloatingActionButton>
         </Paper>
-        <FloatingActionButton onClick={this._onUp.bind(this)} >
-          Up!
-        </FloatingActionButton>
-        <FloatingActionButton onClick={this._onDown.bind(this)} secondary={true}>
-          Down
-        </FloatingActionButton>
-        <Slider name="Slider" value={count} onChange={this._onChange.bind(this)} min={0} max={100} step={1}/>
+        <Slider name="Slider" className="slider" value={count} onChange={this._onChange.bind(this)} min={0} max={100} step={1}/>
       </main>
     );
   }
