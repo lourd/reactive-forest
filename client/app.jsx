@@ -1,11 +1,11 @@
 var { Component, PropTypes } = React;
-var { Paper, RaisedButton, Styles } = Material;
+var { FloatingActionButton, RaisedButton, Styles } = Material;
 var ThemeManager = new Styles.ThemeManager();
 
 class Plant extends Component {
   constructor(props) {
     super(props);
-    this.state = { count: props.initialCount}
+    this.state = { count: 0 }
   }
 
   getChildContext() {
@@ -14,29 +14,27 @@ class Plant extends Component {
     };
   }
 
+  _onClick(e) {
+    this.setState({ count: this.state.count+1 });
+  }
+
   render() {
     var { count } = this.state;
     return (
       <main>
-        {/*<Paper zDepth={2}>{count}</Paper>*/}
-        <RaisedButton label="Yay"/>
-
+        <RaisedButton label={`${count}`}/>
+        <FloatingActionButton onClick={this._onClick.bind(this)} >
+          Up!
+        </FloatingActionButton>
       </main>
     );
   }
 }
 
-Plant.propTypes = {
-  initialCount: PropTypes.number,
-}
-
-Plant.defaultProps = {
-  initialCount: 0,
-}
-
 Plant.childContextTypes = {
   muiTheme: React.PropTypes.object,
 }
+
 document.addEventListener("DOMContentLoaded", function(event) {
   React.render(<Plant />, document.body);
 });
