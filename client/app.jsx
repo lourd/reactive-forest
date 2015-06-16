@@ -32,16 +32,16 @@ class Plant extends Component {
     return (
       <main>
         <Paper zIndex={2} className="count-card">
-          <div className='num'>{truncCount}</div>
+          < Tree height={count} />
           <FloatingActionButton
             onClick={this._onUp.bind(this)}
             className="up"
             style={{
               position: 'absolute',
-              top: '5px',
+              bottom: '5px',
               right: '5px',
             }}
-          >Up!</FloatingActionButton>
+          >Grow</FloatingActionButton>
           <FloatingActionButton
             onClick={this._onDown.bind(this)}
             secondary={true}
@@ -49,11 +49,10 @@ class Plant extends Component {
             style={{
               position: 'absolute',
               bottom: '5px',
-              right: '5px',
+              left: '5px',
             }}
-          >Down</FloatingActionButton>
+          >Die</FloatingActionButton>
         </Paper>
-        <Slider name="Slider" className="slider" value={count} onChange={this._onChange.bind(this)} min={0} max={100} step={1}/>
       </main>
     );
   }
