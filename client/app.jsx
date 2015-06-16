@@ -6,4 +6,6 @@ class Plant extends Component {
   }
 }
 
-React.render(<Plant />, document.body);
+document.addEventListener("DOMContentLoaded", function(event) {
+  React.render(<Plant />, document.body);
+});
