@@ -1,5 +1,6 @@
 var { Component, PropTypes } = React;
-var { RaisedButton } = Material;
+var { Paper, RaisedButton, Styles } = Material;
+var ThemeManager = new Styles.ThemeManager();
 
 class Plant extends Component {
   constructor(props) {
@@ -7,9 +8,21 @@ class Plant extends Component {
     this.state = { count: props.initialCount}
   }
 
+  getChildContext() {
+    return {
+      muiTheme: ThemeManager.getCurrentTheme()
+    };
+  }
+
   render() {
     var { count } = this.state;
-    return <div>{count}</div>;
+    return (
+      <main>
+        {/*<Paper zDepth={2}>{count}</Paper>*/}
+        <RaisedButton label="Yay"/>
+
+      </main>
+    );
   }
 }
 
@@ -21,6 +34,9 @@ Plant.defaultProps = {
   initialCount: 0,
 }
 
+Plant.childContextTypes = {
+  muiTheme: React.PropTypes.object,
+}
 document.addEventListener("DOMContentLoaded", function(event) {
   React.render(<Plant />, document.body);
 });
