@@ -1,61 +1,40 @@
-var { PropTypes } = React;
-var { FloatingActionButton, Paper, Styles } = Material;
-var ThemeManager = new Styles.ThemeManager();
-
 App = React.createClass({
   mixins: [ ReactiveMixin ],
 
-  childContextTypes: {
-    muiTheme: PropTypes.object,
-  },
-
   getReactiveState: function() {
-    var p = new Plant();
     return {
-      plant: p
+      plants: Plants.find().fetch()
     }
   },
 
-  getChildContext: function() {
-    return {
-      muiTheme: ThemeManager.getCurrentTheme()
-    };
-  },
-
-  _onUp: function(e) {
-    this.state.plant.grow()
-  },
-
-  _onDown: function(e) {
-    this.state.plant.die()
+  handleGrow: function(plant, e) {
+    if (plant.height > 9) {
+      new Plant();
+    } else {
+      console.log(plant);
+      plant.grow();
+    }
   },
 
   render: function() {
-    var { plant } = this.state;
+    var { plant, plants } = this.state;
+    var trees = plants.map( function(plantDoc, i) {
+      var p = new Plant(plantDoc._id);
+      return <Tree
+        height={p.height}
+        handleClick={this.handleGrow.bind(this, p)}
+        key={p._id}
+        style={{
+          position: 'absolute',
+          left: `${i*17 % 100}vw`,
+          top: `${i*17 % 100}vh`
+        }}
+        className='plant'
+      />
+    }.bind(this));
     return (
       <main>
-        <Paper zIndex={2} className="count-card">
-          <Tree height={plant.height} />
-          <FloatingActionButton
-            onClick={this._onUp}
-            className="up"
-            style={{
-              position: 'absolute',
-              bottom: '5px',
-              right: '5px',
-            }}
-          >Grow</FloatingActionButton>
-          <FloatingActionButton
-            onClick={this._onDown}
-            secondary={true}
-            className="down"
-            style={{
-              position: 'absolute',
-              bottom: '5px',
-              left: '5px',
-            }}
-          >Die</FloatingActionButton>
-        </Paper>
+        {trees}
       </main>
     );
   }
