@@ -13,6 +13,7 @@ Package.describe({
 Npm.depends({
   'underscore' : '1.8.3',
   'react' : '0.13.3',
+  'material-ui' : '0.9.1',
 });
 
 Package.onUse(function(api) {
@@ -22,5 +23,6 @@ Package.onUse(function(api) {
   api.export([
     'React',
     '_',
+    'Material',
   ], ['client', 'server']);
 });

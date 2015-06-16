@@ -1,10 +1,9 @@
 webapp
 meteor
 autoupdate
-mongo
+reload
 check
+mongo
 
 browserify
 grigio:babel
-
-

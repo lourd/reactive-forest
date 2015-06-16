@@ -1,9 +1,24 @@
-var { Component } = React;
+var { Component, PropTypes } = React;
+var { RaisedButton } = Material;
 
 class Plant extends Component {
-  render() {
-    return <div>Hello world!</div>;
+  constructor(props) {
+    super(props);
+    this.state = { count: props.initialCount}
   }
+
+  render() {
+    var { count } = this.state;
+    return <div>{count}</div>;
+  }
+}
+
+Plant.propTypes = {
+  initialCount: PropTypes.number,
+}
+
+Plant.defaultProps = {
+  initialCount: 0,
 }
 
 document.addEventListener("DOMContentLoaded", function(event) {
