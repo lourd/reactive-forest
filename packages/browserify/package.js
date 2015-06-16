@@ -14,7 +14,6 @@ Npm.depends({
   'underscore' : '1.8.3',
   'react' : '0.13.3',
   'material-ui' : '0.9.1',
-  'gsap' : '1.17.0',
 });
 
 Package.onUse(function(api) {
@@ -25,6 +24,5 @@ Package.onUse(function(api) {
     'React',
     '_',
     'Material',
-    'TweenLite',
   ], 'client');
 });
