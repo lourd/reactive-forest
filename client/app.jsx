@@ -1,40 +1,43 @@
-var { Component, PropTypes } = React;
-var { FloatingActionButton, Paper, Styles, Slider } = Material;
+var { PropTypes } = React;
+var { FloatingActionButton, Paper, Styles } = Material;
 var ThemeManager = new Styles.ThemeManager();
 
-class Plant extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { count: 0 }
-  }
+App = React.createClass({
+  mixins: [ ReactiveMixin ],
 
-  getChildContext() {
+  childContextTypes: {
+    muiTheme: PropTypes.object,
+  },
+
+  getReactiveState: function() {
+    var p = new Plant();
+    return {
+      plant: p
+    }
+  },
+
+  getChildContext: function() {
     return {
       muiTheme: ThemeManager.getCurrentTheme()
     };
-  }
+  },
 
-  _onUp(e) {
-    this.setState({ count: this.state.count+1 });
-  }
+  _onUp: function(e) {
+    this.state.plant.grow()
+  },
 
-  _onDown(e) {
-    this.setState({ count: this.state.count-1 });
-  }
+  _onDown: function(e) {
+    this.state.plant.die()
+  },
 
-  _onChange(e, value) {
-    this.setState({ count: value });
-  }
-
-  render() {
-    var { count } = this.state;
-    var truncCount = parseInt(count);
+  render: function() {
+    var { plant } = this.state;
     return (
       <main>
         <Paper zIndex={2} className="count-card">
-          < Tree height={count} />
+          <Tree height={plant.height} />
           <FloatingActionButton
-            onClick={this._onUp.bind(this)}
+            onClick={this._onUp}
             className="up"
             style={{
               position: 'absolute',
@@ -43,7 +46,7 @@ class Plant extends Component {
             }}
           >Grow</FloatingActionButton>
           <FloatingActionButton
-            onClick={this._onDown.bind(this)}
+            onClick={this._onDown}
             secondary={true}
             className="down"
             style={{
@@ -56,12 +59,8 @@ class Plant extends Component {
       </main>
     );
   }
-}
-
-Plant.childContextTypes = {
-  muiTheme: React.PropTypes.object,
-}
+});
 
 document.addEventListener("DOMContentLoaded", function(event) {
-  React.render(<Plant />, document.body);
+  React.render(<App />, document.body);
 });

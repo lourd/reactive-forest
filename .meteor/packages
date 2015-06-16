@@ -9,3 +9,7 @@ browserify
 grigio:babel
 
 grove:less
+
+grove:react
+autopublish
+insecure
